@@ -1,0 +1,239 @@
+<!----------------------------------------------------------------------------------------------------
+# Nome do arquivo: index.html
+# Função: Programa html que chamará as demais funcionalidades do sistema Localize JK
+# Autora: Joice Käfer
+# Data da criação: 08/09/2008
+# Última modificação: 15/07/2009
+------------------------------------------------------------------------------------------------------>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<!--Conteúdos serão baixados sempre do servidor-->
+	<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="icon" type="image/png" href="/favicon.ico">
+	<title>MapZoom</title>
+
+	<!--Passa a chave de acesso à Google Maps API, permitindo o acesso à mesma-->
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=get_your_key" type="text/javascript"></script>
+
+	<!--Chama as funções JavaScript-->
+	<script language="JavaScript" type="text/javascript" src="/js/icones.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/js/marcadoresBairros.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/js/principal.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/js/armazenaFacilidade.js"></script>
+	<script language="JavaScript" type="text/javascript" src="/js/armazenaImovel.js"></script>
+	<link href="/css/estilo.css" rel="stylesheet" type="text/css">
+<!-- Pequeno script só pra abrir um popup com o manual do usuário -->
+<script type="text/javascript">
+function showPopup(url) {
+newwindow=window.open(url,'name','height=450,width=700,top=100,left=100,resizable,scrollbars');
+if (window.focus) {newwindow.focus()}
+}
+</script> 
+</head>
+
+<body onLoad="load();">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr background="/images/fundo_barra_superior.png">
+		<td height="28"  align="left" valign="bottom" nowrap="nowrap">
+			<a href="documentos/index.html" onClick='showPopup(this.href);return(false);'>
+				<div class="barra_superior_esquerda">Como utilizar</div>
+			</a> 
+			<a href="http://www.brodtec.com/?q=contact" target=_blank'>
+				<div class="barra_superior_esquerda">Contato</div>
+			</a> 
+			<a href="http://www.mapzoom.com.br/index_en.html">
+				<div class="barra_superior_esquerda">In English</div>
+			</a> 
+		</td> 
+
+	</tr>
+</table>
+
+<!--Tabela principal abaixo da barra superior (menu esquerdo, mapa e legenda)-->
+<table width="100%" height="100%" border="0" align="center" cellpadding="5" cellspacing="0">
+	<tr>
+		<td width="150" valign="top"><!--Abre o td do menu esquerdo-->
+			<div style="text-align:center; margin-top:5px; margin-bottom:5px">
+				<a href="/" target="_parent"><img src="/images/mapzoom.jpg" hspace="5" border="0"></a>
+			</div>				
+
+			<table width="150" border="0" cellspacing="0" cellpadding="4">
+				<tr>
+					<td valign="top" colspan="2" align="left"><img src="/images/ponto_cinza.jpg" width="150" height="1">
+					</td>
+				</tr>
+			</table>
+
+			<div>
+				&nbsp;<img src="/images/seta_dir.jpg">&nbsp;<span class="verdana_10N_laranja"> Busque Imóvel</span>	
+			</div>
+			<div class="verdana_10_cinza" style="padding-top:6px; padding-left:16px;">  
+				<select class="verdana_10_cinza" name="imovel" id="imovel" onChange="carregaImoveis();">
+					<option value="qualquer" selected>qualquer imóvel</option>
+					<option value="apartamento">Apartamento</option>
+					<option value="casa">Casa</option>
+					<option value="terreno">Terreno</option>
+				</select>
+			</div> 
+			<br>
+			<div class="verdana_10_cinza" style="padding-left:5px;">
+				a&nbsp;  
+				<select class="verdana_10_cinza" name="distancia" id="distancia" onChange="carregaImoveis();">
+					<option value="qualquer" selected>qualquer distância</option>
+					<option value="500">500 metros</option>
+					<option value="1000">1 km</option>
+					<option value="2000">2 km</option>
+					<option value="5000">5 km</option>
+					<option value="10000">10 km</option>
+				</select> 
+			</div><br>
+
+			<div>
+				&nbsp;<img src="/images/seta_dir.jpg">&nbsp;<span class="verdana_10N_laranja">de</span>
+			</div>
+			<div class="verdana_10_cinza" style="padding-left:12px; padding-top:5px">
+				<input type="checkbox" id="clube" onclick="exibeFacilidades();carregaImoveis()"> Clube<br>
+				<input type="checkbox" id="hospital" onclick="exibeFacilidades();carregaImoveis()"> Hospital<br>		
+				<input type="checkbox" id="hotel" onclick="exibeFacilidades();carregaImoveis()"> Hotel<br>
+				<input type="checkbox" id="igreja" onclick="exibeFacilidades();carregaImoveis()"> Igreja<br>
+				<input type="checkbox" id="ensino" onclick="exibeFacilidades();carregaImoveis()"> Instituição de Ensino<br>		
+				<input type="checkbox" id="parque" onclick="exibeFacilidades();carregaImoveis()"> Parque<br>		
+				<input type="checkbox" id="posto_gasolina" onclick="exibeFacilidades();carregaImoveis()"> Posto de Gasolina<br>
+				<input type="checkbox" id="restaurante" onclick="exibeFacilidades();carregaImoveis()"> Restaurante<br>
+				<input type="checkbox" id="rodoviaria" onclick="exibeFacilidades();carregaImoveis()"> Rodoviária<br>		
+				<input type="checkbox" id="shopping" onclick="exibeFacilidades();carregaImoveis()"> Shopping<br>
+				<input type="checkbox" id="supermercado" onclick="exibeFacilidades();carregaImoveis()"> Supermercado<br>
+			</div><br>
+			<div>
+				&nbsp;<img src="/images/seta_dir.jpg">&nbsp;
+				<span class="verdana_10N_laranja">no bairro<br></span>				
+			</div>
+			<div class="verdana_10_cinza" style="padding-top:6px; padding-left:16px;">  
+				<select class="verdana_10_cinza" name="bairro" id="bairro" onChange="marcadoresBairros(this.value);carregaImoveis()">
+					<option value="qualquer">qualquer bairro</option>
+					<option value="Alto do Parque">Alto do Parque</option>
+					<option value="Americano">Americano</option>
+					<option value="Bom Pastor">Bom Pastor</option>
+					<option value="Campestre">Campestre</option>
+					<option value="Carneiros">Carneiros</option>
+					<option value="Centenário">Centenário</option>
+					<option value="Centro">Centro</option>
+					<option value="Conservas">Conservas</option>
+					<option value="Conventos">Conventos</option>
+					<option value="das Nações">das Nações</option>
+					<option value="Floresta">Floresta</option>
+					<option value="Florestal">Florestal</option>
+					<option value="Hidráulica">Hidráulica</option>
+					<option value="Igrejinha">Igrejinha</option>
+					<option value="Imigrante">Imigrante</option>
+					<option value="Jardim do Cedro">Jardim do Cedro</option>
+					<option value="Moinhos">Moinhos</option>
+					<option value="Moinhos D`Água">Moinhos D'água</option>
+					<option value="Montanha">Montanha</option>
+					<option value="Morro 25">Morro 25</option>
+					<option value="Olarias">Olarias</option>
+					<option value="Planalto">Planalto</option>
+					<option value="Santo André">Santo André</option>
+					<option value="Santo Antônio">Santo Antônio</option>
+					<option value="São Bento">São Bento</option>
+					<option value="São Cristóvão">São Cristóvão</option>
+					<option value="Universitário">Universitário</option>
+				</select>
+			</div> 
+
+			<div style="float:left; margin-top:5px;">
+				<img src="/images/ponto_cinza.jpg" width="150" height="1">
+			</div><br>
+
+			<!--Cadastro-->
+			<table width="150" border="0" cellspacing="0" cellpadding="4">
+				<tr>
+					<td valign="top">
+						<div>
+							&nbsp;<img src="/images/seta_dir.jpg">&nbsp;<span class="verdana_10N_laranja"> Cadastro</span>	
+						</div>
+						<div class="verdana_10_cinza" style="text-align:left">
+							<input name="cadastro" type="radio" id="cadastro" value="f" checked="checked">Facilidade
+							<input name="cadastro" type="radio" id="cadastro" value="i">Imóvel
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" colspan="2" align="left"><img src="/images/ponto_cinza.jpg" width="100%" height="1">
+					</td>
+				</tr>
+
+			</table>
+		</td><!--Fecha o td do menu esquerdo-->
+		<td valign="top"><!--Abre o td do mapa e da legenda-->
+			<div id="map" class="bordaMapa" style="width:100%; height:84%"></div><!--Carrega o mapa-->
+
+			<!--Tabela da legenda-->
+			<table align="right" width="100%" border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td>
+						<!--Tabela da legenda (imóveis)-->
+						<table align="left" width="130px" border="0" cellspacing="0" cellpadding="2">
+							<tr class="verdana_10_cinza">
+								<td align="center" width="50px">
+									<img src="icones/apartamento.png" alt="Apartamento"><br>Apartamento
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/casa.png" alt="Casa"><br>Casa
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/terreno.png" alt="Terreno"><br>Terreno
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<!--Tabela da Legenda (facilidades)-->
+						<table align="center" width="100%" border="0" cellspacing="0" cellpadding="2">
+							<tr class="verdana_10_cinza">
+								<td align="center" width="50px">
+									<img src="icones/clube.png" alt="Clube"><br>Clube
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/hotel.png" alt="Hotel"><br>Hotel
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/hospital.png" alt="Hospital"><br>Hospital
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/igreja.png" alt="Igreja"><br>Igreja
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/escola.png" alt="Instituição de Ensino"><br>Instituição de Ensino
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/parque.png" alt="Parque"><br>Parque
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/posto_gasolina.png" alt="Posto de Gasolina"><br>Posto de Gasolina
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/restaurante.png" alt="Restaurante"><br>Restaurante		
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/rodoviaria.png" alt="Rodoviária"><br>Rodoviária
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/shopping.png" alt="Shopping"><br>Shopping
+								</td>
+								<td align="center" width="50px">
+									<img src="icones/supermercado.png" alt="Supermercado"><br>Supermercado
+								</td>
+							</tr>
+						</table><!--Fecha a tabela da legenda (facilidades)-->
+					</td>
+				</tr>
+			</table><!--Fecha a tabela da legenda-->
+
+		</td><!--Fecha o td do mapa e da legenda-->
+	</tr>
+</table><!--Fecha a tabela do menu esquerdo e do mapa-->
+</body>
+</html>

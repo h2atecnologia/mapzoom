@@ -1,0 +1,47 @@
+# English
+
+In order to install MapZoom you need to have a working web server, enabled with the PHP5 language and PostgreSQL installed with the PostGIS spatial extensions. MapZoom was only tested in a GNU/Linux operating system using apache2 as the webserver. By now, only the Firefox browser is supported. Complete information about MapZoom and the theory behind it can be found on Joice Käfer's original Computer Engineering graduation work, available for download here: http://www.brodtec.com/tcc_joice/Tcc2_JoiceKafer.pdf
+
+If you use Ubuntu, Linux Mint or any other Debian variant, you should be able to install all of MapZoom's prerequisites using apt-get or the Synaptic Package Manager (preferrable). Just search for apache2, PHP5, PostgreSQL and PostGIS, select all of the packages and accept the Package Manager reccomendations for other needed packages. 
+
+After you have PostgreSQL and PostGIS installed, you will need to create a database called "gis" and enable it spatially. Here are the basic instructions:
+
+        # sudo su postgres
+        # createdb gis
+        # createlang plpgsql gis
+        #psql -d gis -f /usr/share/postgresql-(version)-postgis/lwpostgis.sql
+        #psql -d gis -f /usr/share/postgresql-(version)-postgis/spatial_ref_sys.sql
+
+Change (version) to reflect your installation versions.
+
+Now you need to insert into your "gis" database all of the tables located on the "sql" folder, still as the postgres user:
+
+psql -d gis <facilidades.sql
+psql -d gis <bairros.sql
+psql -d gis <imoveis.sql
+
+Now you just need to move MapZoom files to the appropriate Document Root directory (/var/www for a fresh install). Remember to get a Google Maps API Key (http://code.google.com/apis/maps/signup.html) and replace it on your index.html and index_en.html. You will also need to change the conecta.php file in order to reflect your own installation.
+
+# Português
+
+Para instalar o MapZoom você precisará de um servidor web habilitado com a linguagem PHP5 e um gerenciador de banco de dados PostgreSQL com as extensões espaciais PostGIS. O MapZoom foi apenas testado com o sistema operacional GNU/LINUX, usando o apache2 como webserver. Até o momento, apenas o navegador Firefox é suportado. Informação completa sobre o MapZoom e sua teoria podem ser encontrados no trabalho original de graduação de Joice Käfer em seu curso de Engenharia da Computação, que pode ser obtido aqui: http://www.brodtec.com/tcc_joice/Tcc2_JoiceKafer.pdf
+
+Caso você use o Ubuntu, o Linux Mint ou outra variante do Debian, você pode instalar todos os prerrequisitos usando o apt-get ou, preferencialmente, o gerenciador de pacotes Synaptic. Simplesmente procure por apache2, PHP5, PostgreSQL e PostGIS, selecione todos estes pacotes e aceite os demais que o gerenciador de pacotes recomendar. 
+
+Depois que você tiver instalao o PostgreSQL e o PostGIS, você deve criar uma base de dados chamada "gis" e habilitar o uso de extensões espaciais para ela. Aqui estão as instruções básicas para isto:
+
+        # sudo su postgres
+        # createdb gis
+        # createlang plpgsql gis
+        #psql -d gis -f /usr/share/postgresql-(version)-postgis/lwpostgis.sql
+        #psql -d gis -f /usr/share/postgresql-(version)-postgis/spatial_ref_sys.sql
+
+Mude (version) para refletir a sua instalação.
+
+Agora você precisará inserir na base "gis" todas as tabelas localizadas na pasta "sql", ainda como o usuário postgres:
+
+psql -d gis <facilidades.sql
+psql -d gis <bairros.sql
+psql -d gis <imoveis.sql
+
+Mova os arquivos do MapZoom para a pasta Document Root apropriada, de acordo com a configuração de seu apache2 (em uma instalação nova, basta colocar os arquivos em /var/www). Lembre-se de obter uma chave para o uso da Google Maps API (http://code.google.com/apis/maps/signup.html) e substitui-la nos arquivos index.html e index_en.html. Você também precisará modificar o arquivo conecta.php para que ele reflita sua instalação.

@@ -1,0 +1,15 @@
+# This is the README file for MapZoom. For information in Portuguese please read README-pt_BR
+
+This is the first public release of MapZoom. Following the Free and Open Source software tradition, BrodTec (http://brodtec.com) is releasing it in a very early stage. This project originated from Joice Käfer's Computer Engineering graduation work. After this proof of concept, the idea is to have MapZoom becoming a Geo-Aware Content Management System. This proof of concept can be accessed online at http://www.mapzoom.com.br
+
+The software you are downloading now is a proof-of-concept, showing it is possible to easily build geo-aware applications using the Google Maps API, HTML, JavScript and PostgreSQL. The file documentos/index_en.html illustrates how this application can be used. If you want further detail you will have to read Joice's graduation work, which is available in a pdf format in the documentos folder. This document also gives some ideas on how to expand MapZoom.
+
+This software is released under a Creative Commons License, available in the LICENSE file. Use it at your own risk.
+
+The INSTALL file provides some basic installation instructions.
+
+By now, there is no public versioning control system for MapZoom and no discussion lists. You can ask questions using our contact form at http://brodtec.com. You can also contribute with ideas, documentation, translation and code using the same contact form.
+
+BrodTec can provide you with technical support and development services for MapZoom, along with other project management services. Please check our webpage for further information on our company, our people and our projects.
+
+http://brodtec.com
